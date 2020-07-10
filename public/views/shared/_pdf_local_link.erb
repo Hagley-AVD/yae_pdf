@@ -16,12 +16,16 @@ can do that by grabbing the 2nd item in the breadcrumb, which is the colleciton 
 #%>
 <% 
 idraw = @result.identifier
-colid = idraw['id_0']
+idsub = idraw&.gsub(/-/,".")
+colidraw = @result.resolved_resource
+colid = colidraw['id_0']
+rid = colid&.gsub(/-/,".")
+
 if record.primary_type == 'resource'
-  filename = idraw.gsub(/-/,".")
+  filename = idsub
   title = "archives_at_yale_resource_" + record.uri
 else
-  filename = colid.gsub(/-/,".")
+  filename = rid
   title = "archives_at_yale_resource_" + record.resource_uri
 end
 %>
