@@ -24,7 +24,6 @@ else
   filename = colid.gsub(/-/,".")
   title = "archives_at_yale_resource_" + record.resource_uri
 end
-all = @result.resolved_resource
 %>
  <a href="https://hagley-aspace-pdf.s3.amazonaws.com/<%= filename %>.pdf"
     class="btn btn-default page_action print"
