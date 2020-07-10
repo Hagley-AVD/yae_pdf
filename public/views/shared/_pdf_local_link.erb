@@ -5,17 +5,28 @@ archival_object pages %>
 can do that by grabbing the 2nd item in the breadcrumb, which is the colleciton title.
 
 %>
-<%
+<% #
+#if record.primary_type == 'resource'
+#  filename = record.uri.split('/')[-1]
+#  title = "archives_at_yale_resource_" + record.uri
+#else
+#  filename = record.resource_uri.split('/')[-1]
+#  title = "archives_at_yale_resource_" + record.resource_uri
+#end
+#%>
+<% 
+idraw = @result.identifier
+colid = idraw['id_0']
 if record.primary_type == 'resource'
-  filename = record.uri.split('/')[-1]
+  filename = idraw.gsub(/-/,".")
   title = "archives_at_yale_resource_" + record.uri
 else
-  filename = record.resource_uri.split('/')[-1]
+  filename = colid.gsub(/-/,".")
   title = "archives_at_yale_resource_" + record.resource_uri
 end
+all = @result.resolved_resource
 %>
-
- <a href="https://findingaids.hagley.org/<%= filename %>.pdf"
+ <a href="https://hagley-aspace-pdf.s3.amazonaws.com/<%= filename %>.pdf"
     class="btn btn-default page_action print"
     download="<%= filename %>.pdf"
      target="_blank">
@@ -24,4 +35,4 @@ end
       <span class="print-label">
 	<%= t("plugin.yale_pdf.action_label") %>
       </span>
-    </a>
+ </a><p><%= all %></p>
