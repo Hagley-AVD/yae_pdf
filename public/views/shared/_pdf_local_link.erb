@@ -17,8 +17,7 @@ can do that by grabbing the 2nd item in the breadcrumb, which is the colleciton 
 <% 
 idraw = @result.identifier
 idsub = idraw&.gsub(/-/,".")
-colidraw = @result.resolved_resource
-colid = colidraw['id_0']
+colid = @request.resource_id
 rid = colid&.gsub(/-/,".")
 
 if record.primary_type == 'resource'
